@@ -1,5 +1,5 @@
-# PSTerminalServices
-
+# PSTerminalServices - UNOFFICIAL CLONE
+# **Unofficial Clone of [PSTerminalServices](http://psterminalservices.codeplex.com/) Project by [Shay Levy](http://www.codeplex.com/site/users/view/Shay)**
 # <u>**About the Terminal Services Module**</u>
 
 Terminal Services PowerShell Module  
