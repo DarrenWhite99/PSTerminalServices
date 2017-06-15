@@ -1,8 +1,104 @@
 # PSTerminalServices
 
-   <div id="left_column" class="no_border">
-        <h1 class="page_title">Microsoft Public License (Ms-PL)</h1>
-        
-            <p id="license_text">Microsoft Public License &#40;Ms-PL&#41;<br /><br />This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.<br /><br />1. Definitions<br /><br />The terms &#34;reproduce,&#34; &#34;reproduction,&#34; &#34;derivative works,&#34; and &#34;distribution&#34; have the same meaning here as under U.S. copyright law.<br /><br />A &#34;contribution&#34; is the original software, or any additions or changes to the software.<br /><br />A &#34;contributor&#34; is any person that distributes its contribution under this license.<br /><br />&#34;Licensed patents&#34; are a contributor&#39;s patent claims that read directly on its contribution.<br /><br />2. Grant of Rights<br /><br />&#40;A&#41; Copyright Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free copyright license to reproduce its contribution, prepare derivative works of its contribution, and distribute its contribution or any derivative works that you create.<br /><br />&#40;B&#41; Patent Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under its licensed patents to make, have made, use, sell, offer for sale, import, and&#47;or otherwise dispose of its contribution in the software or derivative works of the contribution in the software.<br /><br />3. Conditions and Limitations<br /><br />&#40;A&#41; No Trademark License- This license does not grant you rights to use any contributors&#39; name, logo, or trademarks.<br /><br />&#40;B&#41; If you bring a patent claim against any contributor over patents that you claim are infringed by the software, your patent license from such contributor to the software ends automatically.<br /><br />&#40;C&#41; If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.<br /><br />&#40;D&#41; If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.<br /><br />&#40;E&#41; The software is licensed &#34;as-is.&#34; You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.</p>
-        
-    </div>
+# <u>**About the Terminal Services Module**</u>
+
+Terminal Services PowerShell Module  
+
+The PSTerminalServices module contains functions to manage Terminal Services (including RemoteDesktop) sessions and processes.  
+Is is based on an open source project named [Cassia](http://code.google.com/p/cassia/) (version 2.0.0.60), a .NET library for accessing the native Windows Terminal Services API.  
+
+The following operations are supported on the local and a remote terminal server:  
+
+1\. Enumerating terminal sessions and reporting session information including connection state, user name, client name, client display details, client-reported IP address, and client build number.  
+2\. Logging off a session.  
+3\. Disconnecting a session.  
+3\. Displaying a message box in a session.  
+4\. Enumerating all processes or processes for a specified session.  
+5\. Killing a process.  
+
+Supported Platforms  
+-------------------  
+Cassia has been tested on Windows Server 2008 R2 beta, Windows Server 2008, Windows Server 2003,  
+Windows XP, and Windows Server 2000\. It should work on Windows Vista as well.  
+
+Cassia - Source Files  
+---------------------  
+Source files of Cassia is included in the module's bin directory (compressed file).  
+
+The module can be installed automatically by downloading the MSI package or manually by downloading a ZIP file. The MSI package will install the module under your Documents folder (%USERPROFILE%\Documents\WindowsPowerShell\Modules\RemoteRegistry). The ZIP file contains the module files only and you need to extract its content to one of two places:  
+
+1.  %USERPROFILE%\Documents\WindowsPowerShell\Modules
+2.  %WINDIR%\System32\WindowsPowerShell\v1.0\Modules (need admin privileges)
+3.  **If the directory tree (of one of the above) doesn't exist then you should manually create it.**
+
+# <u>**Prerequisites**</u>
+
+Windows PowerShell 2.0 [http://support.microsoft.com/kb/968929](http://support.microsoft.com/kb/968929)  
+
+# <u>**How to use the module**</u>
+
+Check if the module is installed correctly, from your PowerShell session type:  
+
+<pre>PS > Get-Module -Name PSTerminalServices -ListAvailable
+
+ModuleType Name                      ExportedCommands
+---------- ----                      ----------------
+Manifest   PSTerminalServices        {}
+</pre>
+
+If you don't see the above result then the module was not installed correctly. If you choose to download and install the module manually (zip file), make sure the module directory exists under "%USERPROFILE%\Documents\WindowsPowerShell\Modules"  
+
+Importing the module:  
+
+<pre>PS > Import-Module PSTerminalServices
+</pre>
+
+Get a list of module functions  
+
+<pre>PS > Get-Command -Module PSTerminalServices
+
+CommandType Name                 Definition
+----------- ----                 ----------
+Function    Disconnect-TSSession ...
+Function    Get-TSCurrentSession ...
+Function    Get-TSProcess        ...
+Function    Get-TSServers        ...
+Function    Get-TSSession        ...
+Function    Send-TSMessage       ...
+Function    Stop-TSProcess       ...
+Function    Stop-TSSession       ...
+</pre>
+
+There is also an about_PSTerminalServices_Module help file (under the en_US folder), to review it:  
+
+<pre>PS > Get-Help about_PSTerminalServices_Module
+</pre>
+
+The following functions are added to the current session when you import the module:  
+
+*   Disconnect-TSSession - Disconnects any attached user from the session.
+*   Get-TSCurrentSession - Provides information about the session in which the current process is running.
+*   Get-TSServers - Enumerates all terminal servers in a given domain.
+*   Get-TSProcess - Gets a list of processes running in a specific session or in all sessions.
+*   Get-TSSession - Lists the sessions on a given terminal server.
+*   Send-TSMessage - Displays a message box in the specified session ID.
+*   Stop-TSProcess - Terminates the process running in a specific session or in all sessions.
+*   Stop-TSSession - Logs the session off, disconnecting any user that might be connected.
+
+# <u>**Some Code Examples**</u>
+
+<pre>For more code examples use Get-Help <cmdletName> –Examples.
+
+# Logs off all the active sessions from remote computer 'comp1', no confirmations
+PS > Get-TSSession -ComputerName comp1 -State Active | Stop-TSSession –Force
+
+# Gets all Active sessions from remote computer 'comp1', made from IP addresses that starts with '10'.
+PS > Get-TSSession -ComputerName comp1 -Filter {$_.ClientIPAddress -like '10*' -AND $_.ConnectionState -eq 'Active'} 
+
+# Displays a message box inside all active sessions of computer name 'comp1'."}
+PS > $Message = "Importnat`n, the server is going down for maintenance in 10 minutes. Please save your work and logoff."
+PS > Get-TSSession -State Active -ComputerName comp1 | Send-TSMessage -Message $Message 
+
+# Gets all processes connected to session id 0 from remote computer 'comp1'.
+PS>Get-TSSession -ID 0 -ComputerName comp1 | Get-TSProcess 
+</pre>
