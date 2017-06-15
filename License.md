@@ -1,6 +1,5 @@
-# PSTerminalServices
-
 # Microsoft Public License (Ms-PL)
+Retreived from [http://psterminalservices.codeplex.com/license](http://psterminalservices.codeplex.com/license) on July 15, 2017
 
 Microsoft Public License (Ms-PL)  
 
