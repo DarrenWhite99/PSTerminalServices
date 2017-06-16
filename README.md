@@ -1,11 +1,11 @@
 # PSTerminalServices - UNOFFICIAL CLONE
 # **Unofficial Clone of [PSTerminalServices](http://psterminalservices.codeplex.com/) Project by [Shay Levy](http://www.codeplex.com/site/users/view/Shay)**
 # <u>**About the Terminal Services Module**</u>
+Page content retrieved from http://psterminalservices.codeplex.com/ on July 15, 2017 with minor spelling corrections/edits.
 
 Terminal Services PowerShell Module  
 
-The PSTerminalServices module contains functions to manage Terminal Services (including RemoteDesktop) sessions and processes.  
-Is is based on an open source project named [Cassia](http://code.google.com/p/cassia/) (version 2.0.0.60), a .NET library for accessing the native Windows Terminal Services API.  
+The PSTerminalServices module contains functions to manage Terminal Services (including RemoteDesktop) sessions and processes.  It is based on an open source project named [Cassia](http://code.google.com/p/cassia/) (version 2.0.0.60), a .NET library for accessing the native Windows Terminal Services API.  
 
 The following operations are supported on the local and a remote terminal server:  
 
@@ -18,8 +18,7 @@ The following operations are supported on the local and a remote terminal server
 
 Supported Platforms  
 -------------------  
-Cassia has been tested on Windows Server 2008 R2 beta, Windows Server 2008, Windows Server 2003,  
-Windows XP, and Windows Server 2000\. It should work on Windows Vista as well.  
+Cassia has been tested on Windows Server 2008 R2 beta, Windows Server 2008, Windows Server 2003, Windows XP, and Windows Server 2000\. It should work on Windows Vista as well.  
 
 Cassia - Source Files  
 ---------------------  
